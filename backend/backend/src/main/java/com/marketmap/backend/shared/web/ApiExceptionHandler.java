@@ -13,6 +13,7 @@ import org.springframework.web.servlet.resource.NoResourceFoundException;
 import com.marketmap.backend.layout.LayoutNotFoundException;
 import com.marketmap.backend.product.ProductLocationNotFoundException;
 import com.marketmap.backend.product.ProductNotFoundException;
+import com.marketmap.backend.search.InvalidSearchQueryException;
 import com.marketmap.backend.shelf.ShelfNotFoundException;
 import com.marketmap.backend.shelf.ShelfSectionNotFoundException;
 import com.marketmap.backend.store.StoreNotFoundException;
@@ -30,6 +31,11 @@ public class ApiExceptionHandler {
     })
     ResponseEntity<ApiErrorResponse> handleNotFound(RuntimeException exception) {
         return build(HttpStatus.NOT_FOUND, exception.getMessage());
+    }
+
+    @ExceptionHandler(InvalidSearchQueryException.class)
+    ResponseEntity<ApiErrorResponse> handleInvalidSearchQuery(InvalidSearchQueryException exception) {
+        return build(HttpStatus.BAD_REQUEST, exception.getMessage());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -60,3 +66,4 @@ public class ApiExceptionHandler {
     record ApiErrorResponse(int status, String message, Instant timestamp) {
     }
 }
+

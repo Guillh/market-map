@@ -66,10 +66,10 @@ Nesta fase, os pacotes existem apenas como estrutura inicial. As regras de negoc
 
 ## Fase 3 - Busca e Localizacao
 
-- [ ] Buscar produto por nome, codigo ou identificador
-- [ ] Retornar localizacao fisica do produto
-- [ ] Exibir destaque visual no mapa
-- [ ] Criar filtros por loja, setor ou categoria
+- [x] Buscar produto por nome, codigo ou identificador
+- [x] Retornar localizacao fisica do produto
+- [x] Retornar dados para destaque visual no mapa
+- [x] Criar filtro inicial por loja
 
 ## Fase 4 - Editor Visual
 
@@ -162,3 +162,14 @@ Foram criados CRUDs REST para todos os recursos principais do modelo base:
 - `ProductLocation`: `/api/product-locations`
 
 Cada recurso possui endpoints de listagem, busca por id, criacao, atualizacao e remocao. Os DTOs de entrada usam validacoes simples para campos obrigatorios, tamanhos maximos e numeros positivos quando aplicavel.
+
+## Progresso da Fase 3
+
+Foi criado o endpoint inicial de busca:
+
+- `GET /api/search/products?query=texto`
+- `GET /api/search/products?query=texto&storeId=uuid-da-loja`
+
+A busca considera nome, SKU e marca do produto. A resposta ja retorna a trilha fisica completa para o frontend destacar a posicao no mapa: loja, layout, gondola/prateleira, secao, coordenadas e dimensoes da gondola, nivel e posicao da secao.
+
+Busca sem texto retorna erro `400 Bad Request`. Busca sem resultados retorna uma lista vazia.
