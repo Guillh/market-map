@@ -1,0 +1,2 @@
+-- Initial baseline for Market Map.
+-- Domain tables will be introduced gradually in future migrations.

@@ -1,0 +1,34 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: market-map-postgres
+    environment:
+      POSTGRES_DB: market_map
+      POSTGRES_USER: market_map
+      POSTGRES_PASSWORD: market_map
+    ports:
+      - "5432:5432"
+    volumes:
+      - market-map-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U market_map -d market_map"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend/backend
+    container_name: market-map-backend
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/market_map
+      SPRING_DATASOURCE_USERNAME: market_map
+      SPRING_DATASOURCE_PASSWORD: market_map
+    ports:
+      - "8080:8080"
+
+volumes:
+  market-map-postgres-data:
