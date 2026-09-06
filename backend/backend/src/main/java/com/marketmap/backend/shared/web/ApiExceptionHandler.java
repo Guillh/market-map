@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
-import com.marketmap.backend.layout.LayoutNotFoundException;
-import com.marketmap.backend.product.ProductLocationNotFoundException;
-import com.marketmap.backend.product.ProductNotFoundException;
-import com.marketmap.backend.search.InvalidSearchQueryException;
-import com.marketmap.backend.shelf.ShelfNotFoundException;
-import com.marketmap.backend.shelf.ShelfSectionNotFoundException;
-import com.marketmap.backend.store.StoreNotFoundException;
+import com.marketmap.backend.layout.exception.LayoutNotFoundException;
+import com.marketmap.backend.product.exception.ProductLocationNotFoundException;
+import com.marketmap.backend.product.exception.ProductNotFoundException;
+import com.marketmap.backend.search.exception.InvalidSearchQueryException;
+import com.marketmap.backend.shelf.exception.ShelfNotFoundException;
+import com.marketmap.backend.shelf.exception.ShelfSectionNotFoundException;
+import com.marketmap.backend.store.exception.StoreNotFoundException;
 
 @RestControllerAdvice
 public class ApiExceptionHandler {
