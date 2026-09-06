@@ -22,8 +22,9 @@ public class ShelfService {
         this.layoutRepository = layoutRepository;
     }
 
-    public List<ShelfResponse> findAll() {
-        return shelfRepository.findAll().stream().map(ShelfResponse::from).toList();
+    public List<ShelfResponse> findAll(UUID layoutId) {
+        List<Shelf> shelves = layoutId == null ? shelfRepository.findAll() : shelfRepository.findByLayoutId(layoutId);
+        return shelves.stream().map(ShelfResponse::from).toList();
     }
 
     public ShelfResponse findById(UUID id) {
@@ -58,3 +59,4 @@ public class ShelfService {
         return layoutRepository.findById(id).orElseThrow(() -> new LayoutNotFoundException(id));
     }
 }
+

@@ -22,8 +22,9 @@ public class LayoutService {
         this.storeRepository = storeRepository;
     }
 
-    public List<LayoutResponse> findAll() {
-        return layoutRepository.findAll().stream()
+    public List<LayoutResponse> findAll(UUID storeId) {
+        List<Layout> layouts = storeId == null ? layoutRepository.findAll() : layoutRepository.findByStoreId(storeId);
+        return layouts.stream()
                 .map(LayoutResponse::from)
                 .toList();
     }
@@ -62,3 +63,4 @@ public class LayoutService {
                 .orElseThrow(() -> new StoreNotFoundException(id));
     }
 }
+

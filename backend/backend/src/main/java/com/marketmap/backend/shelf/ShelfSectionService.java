@@ -18,8 +18,9 @@ public class ShelfSectionService {
         this.shelfRepository = shelfRepository;
     }
 
-    public List<ShelfSectionResponse> findAll() {
-        return shelfSectionRepository.findAll().stream().map(ShelfSectionResponse::from).toList();
+    public List<ShelfSectionResponse> findAll(UUID shelfId) {
+        List<ShelfSection> sections = shelfId == null ? shelfSectionRepository.findAll() : shelfSectionRepository.findByShelfId(shelfId);
+        return sections.stream().map(ShelfSectionResponse::from).toList();
     }
 
     public ShelfSectionResponse findById(UUID id) {
@@ -54,3 +55,4 @@ public class ShelfSectionService {
         return shelfRepository.findById(id).orElseThrow(() -> new ShelfNotFoundException(id));
     }
 }
+

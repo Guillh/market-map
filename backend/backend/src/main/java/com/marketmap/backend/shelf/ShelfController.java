@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
@@ -27,8 +28,8 @@ public class ShelfController {
     }
 
     @GetMapping
-    public List<ShelfResponse> findAll() {
-        return shelfService.findAll();
+    public List<ShelfResponse> findAll(@RequestParam(required = false) UUID layoutId) {
+        return shelfService.findAll(layoutId);
     }
 
     @GetMapping("/{id}")
@@ -53,3 +54,4 @@ public class ShelfController {
         return ResponseEntity.noContent().build();
     }
 }
+

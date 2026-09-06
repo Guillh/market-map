@@ -30,5 +30,19 @@ services:
     ports:
       - "8080:8080"
 
+  frontend:
+    image: node:22-alpine
+    container_name: market-map-frontend
+    working_dir: /workspace
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
+    depends_on:
+      - backend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/workspace
+      - market-map-frontend-node-modules:/workspace/node_modules
+
 volumes:
   market-map-postgres-data:
+  market-map-frontend-node-modules:

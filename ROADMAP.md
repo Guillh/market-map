@@ -16,8 +16,8 @@ No futuro, o sistema tambem podera evoluir para controle de estoque, lotes, vali
 - [x] PostgreSQL como banco principal
 - [x] Flyway para migrations
 - [x] Hibernate com `ddl-auto=validate`
-- [ ] Frontend em React + TypeScript + Vite
-- [ ] Integracao do frontend com a API
+- [x] Frontend em React + TypeScript + Vite
+- [x] Integracao inicial do frontend com a API
 - [ ] Autenticacao e autorizacao
 - [ ] Editor visual de mapa
 
@@ -50,8 +50,8 @@ Nesta fase, os pacotes existem apenas como estrutura inicial. As regras de negoc
 - [x] Criar Dockerfile do backend
 - [x] Criar README inicial com instrucoes de execucao
 - [x] Validar build/testes localmente
-- [ ] Criar frontend React + TypeScript + Vite
-- [ ] Fazer frontend chamar `GET /api/health`
+- [x] Criar frontend React + TypeScript + Vite
+- [x] Fazer frontend chamar `GET /api/health`
 
 ## Fase 2 - Modelo Base
 
@@ -73,12 +73,12 @@ Nesta fase, os pacotes existem apenas como estrutura inicial. As regras de negoc
 
 ## Fase 4 - Editor Visual
 
-- [ ] Criar canvas ou area visual do layout
-- [ ] Permitir adicionar gondolas/prateleiras
-- [ ] Permitir mover e redimensionar elementos
-- [ ] Permitir editar subdivisoes
-- [ ] Salvar estrutura visual no backend
-- [ ] Carregar mapa salvo
+- [x] Criar area visual inicial do layout
+- [x] Permitir adicionar gondolas/prateleiras
+- [x] Permitir mover e redimensionar elementos
+- [x] Permitir criar e remover subdivisoes
+- [x] Salvar estrutura visual no backend
+- [x] Carregar mapa salvo pelos endpoints do backend
 
 ## Fase 5 - Estoque Futuro
 
@@ -173,3 +173,55 @@ Foi criado o endpoint inicial de busca:
 A busca considera nome, SKU e marca do produto. A resposta ja retorna a trilha fisica completa para o frontend destacar a posicao no mapa: loja, layout, gondola/prateleira, secao, coordenadas e dimensoes da gondola, nivel e posicao da secao.
 
 Busca sem texto retorna erro `400 Bad Request`. Busca sem resultados retorna uma lista vazia.
+
+## Progresso da Fase 4
+
+Foi criada a base do frontend em React + TypeScript + Vite dentro de `frontend/`.
+
+A primeira tela do editor visual inclui:
+
+- status da API usando `GET /api/health`
+- sidebar com contexto de loja/layout
+- area visual inicial do mapa
+- prateleiras selecionaveis carregadas a partir do backend
+- painel de propriedades da prateleira selecionada
+
+O Vite foi configurado com proxy para `/api`, encaminhando chamadas locais para o backend em `http://localhost:8080` durante o desenvolvimento.
+
+A tela agora consome os CRUDs reais de `Store`, `Layout`, `Shelf` e `ShelfSection`. Tambem permite criar dados iniciais, adicionar prateleiras, editar dimensoes pelo painel, arrastar prateleiras no mapa, salvar posicoes no backend, criar secoes e remover secoes.
+
+
+## Fechamento da Fase 4
+
+A Fase 4 agora possui um fluxo demonstravel completo no frontend:
+
+- criar dados iniciais de loja, layout e prateleira
+- carregar mapa salvo a partir do backend
+- adicionar, editar, mover, redimensionar e remover prateleiras
+- criar, editar e remover secoes de prateleira
+- cadastrar produto pela UI
+- associar produto a secao selecionada
+- buscar produto por texto
+- destacar no mapa a prateleira e a secao onde o produto foi encontrado
+
+As validacoes finais executadas foram:
+
+```bash
+.\mvnw.cmd test
+npm.cmd run build
+npm.cmd run lint
+```
+
+
+## Ajuste Final da Navegacao da Fase 4
+
+A interface foi reorganizada para separar configuracao e busca:
+
+- tela principal de `Configuracao`
+- tela principal de `Busca`
+- aba `Loja` para configurar o tamanho do layout
+- aba `Prateleiras` para criar, selecionar, editar, mover e redimensionar prateleiras
+- exibicao e edicao de secoes ao selecionar uma prateleira configurada
+- aba `Vincular Produtos` para associar produtos existentes a secoes, sem editar prateleiras
+- aba `Produtos` para cadastrar e listar produtos
+- tela de busca separada, por enquanto sem exibir o mapa da loja
