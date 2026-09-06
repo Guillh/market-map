@@ -1,0 +1,10 @@
+package com.marketmap.backend.layout;
+
+import java.util.UUID;
+
+public class LayoutNotFoundException extends RuntimeException {
+
+    public LayoutNotFoundException(UUID id) {
+        super("Layout not found: " + id);
+    }
+}

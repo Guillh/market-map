@@ -56,6 +56,15 @@ public class Shelf {
         this.heightCm = heightCm;
     }
 
+    public void update(Layout layout, String name, Integer positionXCm, Integer positionYCm, Integer widthCm, Integer heightCm) {
+        this.layout = layout;
+        this.name = name;
+        this.positionXCm = positionXCm;
+        this.positionYCm = positionYCm;
+        this.widthCm = widthCm;
+        this.heightCm = heightCm;
+    }
+
     public UUID getId() {
         return id;
     }
@@ -88,3 +97,4 @@ public class Shelf {
         return createdAt;
     }
 }
+

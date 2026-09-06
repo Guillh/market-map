@@ -41,6 +41,11 @@ public class ProductLocation {
         this.shelfSection = shelfSection;
     }
 
+    public void update(Product product, ShelfSection shelfSection) {
+        this.product = product;
+        this.shelfSection = shelfSection;
+    }
+
     public UUID getId() {
         return id;
     }
@@ -57,3 +62,4 @@ public class ProductLocation {
         return createdAt;
     }
 }
+

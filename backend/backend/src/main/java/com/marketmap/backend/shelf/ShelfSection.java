@@ -46,6 +46,13 @@ public class ShelfSection {
         this.positionIndex = positionIndex;
     }
 
+    public void update(Shelf shelf, String name, Integer levelIndex, Integer positionIndex) {
+        this.shelf = shelf;
+        this.name = name;
+        this.levelIndex = levelIndex;
+        this.positionIndex = positionIndex;
+    }
+
     public UUID getId() {
         return id;
     }
@@ -70,3 +77,4 @@ public class ShelfSection {
         return createdAt;
     }
 }
+

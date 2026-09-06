@@ -62,7 +62,7 @@ Nesta fase, os pacotes existem apenas como estrutura inicial. As regras de negoc
 - [x] Definir produto
 - [x] Associar produto a uma localizacao fisica
 - [x] Criar migrations reais para o modelo base
-- [ ] Criar endpoints CRUD iniciais
+- [x] Criar endpoints CRUD iniciais
 
 ## Fase 3 - Busca e Localizacao
 
@@ -135,3 +135,30 @@ A validacao local passou com:
 ```bash
 .\mvnw.cmd test
 ```
+
+## Progresso dos Endpoints
+
+O primeiro CRUD criado foi o de `Store`, porque ele representa a loja, mercado, deposito ou unidade operacional. Esse recurso ja possui:
+
+- `GET /api/stores`
+- `GET /api/stores/{id}`
+- `POST /api/stores`
+- `PUT /api/stores/{id}`
+- `DELETE /api/stores/{id}`
+
+Tambem foram criados `StoreRepository`, `StoreService`, DTOs de entrada e saida, e um handler global inicial para erros de validacao e recurso nao encontrado.
+
+Os CRUDs principais do modelo base agora seguem a dependencia natural do dominio: `Store`, `Layout`, `Shelf`, `ShelfSection`, `Product` e `ProductLocation`.
+
+## CRUDs da Fase 2
+
+Foram criados CRUDs REST para todos os recursos principais do modelo base:
+
+- `Store`: `/api/stores`
+- `Layout`: `/api/layouts`
+- `Shelf`: `/api/shelves`
+- `ShelfSection`: `/api/shelf-sections`
+- `Product`: `/api/products`
+- `ProductLocation`: `/api/product-locations`
+
+Cada recurso possui endpoints de listagem, busca por id, criacao, atualizacao e remocao. Os DTOs de entrada usam validacoes simples para campos obrigatorios, tamanhos maximos e numeros positivos quando aplicavel.

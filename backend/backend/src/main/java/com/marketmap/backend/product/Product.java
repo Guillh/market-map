@@ -38,6 +38,12 @@ public class Product {
         this.brand = brand;
     }
 
+    public void update(String name, String sku, String brand) {
+        this.name = name;
+        this.sku = sku;
+        this.brand = brand;
+    }
+
     public UUID getId() {
         return id;
     }
@@ -58,3 +64,4 @@ public class Product {
         return createdAt;
     }
 }
+

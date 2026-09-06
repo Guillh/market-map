@@ -48,6 +48,13 @@ public class Layout {
         this.heightCm = heightCm;
     }
 
+    public void update(Store store, String name, Integer widthCm, Integer heightCm) {
+        this.store = store;
+        this.name = name;
+        this.widthCm = widthCm;
+        this.heightCm = heightCm;
+    }
+
     public UUID getId() {
         return id;
     }
@@ -72,3 +79,4 @@ public class Layout {
         return createdAt;
     }
 }
+

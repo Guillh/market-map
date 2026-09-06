@@ -34,6 +34,11 @@ public class Store {
         this.description = description;
     }
 
+    public void update(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
     public UUID getId() {
         return id;
     }
