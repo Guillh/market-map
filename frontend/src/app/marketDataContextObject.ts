@@ -3,6 +3,7 @@ import type { Layout, Product, ProductSearchResult, Shelf, ShelfSection, Store }
 import type { ConfigTab, HealthStatus, LayoutForm, ProductForm, Screen, SectionForm, ShelfForm } from './types'
 
 export type MarketDataContextValue = {
+  acceptSavedLayout: (layout: Layout) => void
   screen: Screen
   setScreen: Dispatch<SetStateAction<Screen>>
   configTab: ConfigTab

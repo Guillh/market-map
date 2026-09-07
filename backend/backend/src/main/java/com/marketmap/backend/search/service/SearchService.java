@@ -27,4 +27,16 @@ public class SearchService {
 
         return productSearchRepository.searchProducts(query.trim(), storeId);
     }
-}
+
+    public List<com.marketmap.backend.search.dto.ProductSuggestion> suggestions(String query, UUID layoutId) {
+        if (query == null || query.isBlank()) throw new InvalidSearchQueryException();
+        var products = productSearchRepository.suggestions(query.trim(), layoutId, org.springframework.data.domain.PageRequest.of(0, 30));
+        if (products.isEmpty()) return List.of();
+        var locations = productSearchRepository.locationsForProducts(products.stream().map(com.marketmap.backend.product.Product::getId).toList(), layoutId);
+        return products.stream().map(p -> new com.marketmap.backend.search.dto.ProductSuggestion(
+            p.getId(), p.getName(), p.getSku(), p.getBrand(),
+            locations.stream().filter(r -> r.productId().equals(p.getId()))
+                .map(com.marketmap.backend.search.dto.ProductSearchResult::location)
+                .filter(l -> layoutId == null || l.layoutId().equals(layoutId)).toList()
+        )).toList();
+    }}

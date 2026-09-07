@@ -67,6 +67,11 @@ public class ApiExceptionHandler {
         return build(HttpStatus.NOT_FOUND, "Resource not found");
     }
 
+    @ExceptionHandler(org.springframework.web.server.ResponseStatusException.class)
+    ResponseEntity<ApiErrorResponse> handleNavigation(org.springframework.web.server.ResponseStatusException exception) {
+        return build(HttpStatus.valueOf(exception.getStatusCode().value()), exception.getReason());
+    }
+
     private ResponseEntity<ApiErrorResponse> build(HttpStatus status, String message) {
         return ResponseEntity
                 .status(status)

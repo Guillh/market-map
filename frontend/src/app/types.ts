@@ -1,6 +1,6 @@
 export type HealthStatus = { status: string; timestamp: string }
 export type Screen = 'config' | 'search' | 'inventory'
-export type ConfigTab = 'store' | 'shelves' | 'link-products' | 'products'
+export type ConfigTab = 'store' | 'shelves' | 'link-products' | 'products' | 'navigation'
 export type ShelfForm = { name: string; positionXCm: number; positionYCm: number; widthCm: number; heightCm: number }
 export type SectionForm = { name: string; levelIndex: number; positionIndex: number }
 export type ProductForm = { name: string; sku: string; brand: string }

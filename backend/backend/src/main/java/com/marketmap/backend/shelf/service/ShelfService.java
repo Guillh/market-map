@@ -39,6 +39,10 @@ public class ShelfService {
     @Transactional
     public ShelfResponse create(ShelfRequest request) {
         Layout layout = getLayout(request.layoutId());
+        if (!com.marketmap.backend.layout.service.LayoutGeometry.containsRectangle(
+            com.marketmap.backend.layout.service.LayoutGeometry.boundary(layout),request.positionXCm(),request.positionYCm(),request.widthCm(),request.heightCm()))
+            throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.BAD_REQUEST,
+                "A prateleira deve ficar inteiramente dentro do contorno da loja.");
         Shelf shelf = new Shelf(layout, request.name(), request.positionXCm(), request.positionYCm(), request.widthCm(), request.heightCm());
         return ShelfResponse.from(shelfRepository.save(shelf));
     }
@@ -47,6 +51,10 @@ public class ShelfService {
     public ShelfResponse update(UUID id, ShelfRequest request) {
         Shelf shelf = getShelf(id);
         Layout layout = getLayout(request.layoutId());
+        if (!com.marketmap.backend.layout.service.LayoutGeometry.containsRectangle(
+            com.marketmap.backend.layout.service.LayoutGeometry.boundary(layout),request.positionXCm(),request.positionYCm(),request.widthCm(),request.heightCm()))
+            throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.BAD_REQUEST,
+                "A prateleira deve ficar inteiramente dentro do contorno da loja.");
         shelf.update(layout, request.name(), request.positionXCm(), request.positionYCm(), request.widthCm(), request.heightCm());
         return ShelfResponse.from(shelf);
     }

@@ -1,3 +1,4 @@
+import { layoutBoundary, polygonPoints } from '../lib/layoutGeometry'
 import { useMarketData } from '../app/useMarketData'
 import { groupSectionsByLevel } from '../lib/sections'
 
@@ -20,7 +21,10 @@ export function StoreMap() {
   if (!selectedLayout) return <p className="empty-state">Crie ou selecione uma loja e um layout.</p>
 
   return (
-    <div className="map-grid" style={{ width: selectedLayout.widthCm, height: selectedLayout.heightCm }}>
+    <div className="map-grid shaped-map" style={{ width: selectedLayout.widthCm, height: selectedLayout.heightCm }}>
+      <svg className="store-boundary-overlay" viewBox={`0 0 ${selectedLayout.widthCm} ${selectedLayout.heightCm}`} aria-hidden="true">
+        <polygon points={polygonPoints(layoutBoundary(selectedLayout))} fill="var(--surface-muted)" stroke="var(--border-strong)" strokeWidth="3" />
+      </svg>
       {shelves.map((shelf) => (
         <button
           className={shelf.id === selectedShelfId ? 'map-shelf selected' : 'map-shelf'}

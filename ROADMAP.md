@@ -265,3 +265,44 @@ cd F:\market-map\frontend
 npm.cmd run build
 npm.cmd run lint
 ```
+
+## Busca com navegação até o produto
+
+- [x] Cadastro persistente de terminais por layout.
+- [x] Associação do navegador a um terminal e opção de desvincular.
+- [x] Cadastro de obstáculos e pontos de acesso das prateleiras.
+- [x] Validação de posições e margem de passagem.
+- [x] Serviço A* com desvios e resposta para caminhos indisponíveis.
+- [x] Sugestões por nome, SKU e marca, agrupadas por produto.
+- [x] Filtro pelo layout do terminal e indicação de produtos sem localização.
+- [x] Seleção de produto e escolha entre múltiplas localizações.
+- [x] Mapa de consulta com origem, percurso, destino e distância aproximada.
+- [x] Vista frontal com níveis, posições e seção destacada.
+- [x] Componentes de navegação separados da edição de prateleiras.
+- [x] Testes automatizados de rotas, persistência e busca.
+- [ ] Validação física dos caminhos na loja com terminais e obstáculos reais.
+
+Guia de configuração e limites desta versão: [NAVIGATION.md](NAVIGATION.md).
+
+## Formato irregular da loja
+
+- [x] Contorno persistido por layout, com migração V5.
+- [x] Modelos retangular, L e U.
+- [x] Desenho livre e edição dos vértices por arraste ou coordenadas.
+- [x] Prévia da área e das prateleiras existentes.
+- [x] Validação de paredes cruzadas, pontos repetidos e limites.
+- [x] Proteção contra contornos que deixem prateleiras, obstáculos ou terminais fora da loja.
+- [x] Mapas de configuração e busca representam o contorno.
+- [x] Rotas respeitam recortes e paredes inclinadas.
+- [x] Criação de prateleiras procura uma posição inicial dentro do contorno.
+- [x] Testes de geometria, persistência e rotas em formatos irregulares.
+
+## Correções da integração entre contorno e navegação
+
+- [x] Validar coordenadas na prévia e impedir salvar pontos inválidos.
+- [x] Carregar o contorno persistido ao abrir a configuração de terminais.
+- [x] Destacar prévias não salvas e erros de gravação do contorno.
+- [x] Selecionar computador de origem diretamente na busca.
+- [x] Calcular chegada automática quando não há acesso manual.
+- [x] Preservar prioridade do acesso configurado.
+- [x] Testar chegada automática em loja U e rejeição de terminal no recorte.

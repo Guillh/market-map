@@ -27,4 +27,9 @@ public class SearchController {
             @RequestParam(required = false) UUID storeId) {
         return searchService.searchProducts(query, storeId);
     }
-}
+
+    @GetMapping("/suggestions")
+    public List<com.marketmap.backend.search.dto.ProductSuggestion> suggestions(
+        @RequestParam String query, @RequestParam(required = false) UUID layoutId) {
+        return searchService.suggestions(query, layoutId);
+    }}

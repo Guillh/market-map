@@ -21,5 +21,6 @@ public record LayoutRequest(
 
         @NotNull
         @Positive
-        Integer heightCm) {
+        Integer heightCm,
+        @Size(max = 60) java.util.List<@jakarta.validation.Valid @NotNull LayoutVertex> boundary) {
 }

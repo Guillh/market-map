@@ -5,12 +5,15 @@ export type Store = {
   createdAt: string
 }
 
+export type LayoutVertex = { x: number; y: number }
+
 export type Layout = {
   id: string
   storeId: string
   name: string
   widthCm: number
   heightCm: number
+  boundary?: LayoutVertex[]
   createdAt: string
 }
 
@@ -127,7 +130,8 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
   })
 
   if (!response.ok) {
-    throw new Error(`HTTP ${response.status}`)
+    const detail = await response.json().catch(() => null) as { message?: string; detail?: string } | null
+    throw new Error(detail?.message ?? detail?.detail ?? `HTTP ${response.status}`)
   }
 
   if (response.status === 204) {
@@ -144,9 +148,9 @@ export const api = {
     request<Store>('/api/stores', { method: 'POST', body }),
   layouts: (storeId?: string) =>
     request<Layout[]>(storeId ? `/api/layouts?storeId=${storeId}` : '/api/layouts'),
-  createLayout: (body: { storeId: string; name: string; widthCm: number; heightCm: number }) =>
+  createLayout: (body: { storeId: string; name: string; widthCm: number; heightCm: number; boundary?: LayoutVertex[] }) =>
     request<Layout>('/api/layouts', { method: 'POST', body }),
-  updateLayout: (id: string, body: { storeId: string; name: string; widthCm: number; heightCm: number }) =>
+  updateLayout: (id: string, body: { storeId: string; name: string; widthCm: number; heightCm: number; boundary?: LayoutVertex[] }) =>
     request<Layout>(`/api/layouts/${id}`, { method: 'PUT', body }),
   shelves: (layoutId?: string) =>
     request<Shelf[]>(layoutId ? `/api/shelves?layoutId=${layoutId}` : '/api/shelves'),

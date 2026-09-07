@@ -1,3 +1,4 @@
+import { initialShelfPlacement } from '../lib/layoutGeometry'
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { api, type Layout, type Product, type ProductSearchResult, type Shelf, type ShelfSection, type Store } from '../services/api'
 import { defaultLayoutForm, defaultProductForm, defaultSectionForm, defaultShelfForm, type ConfigTab, type HealthStatus, type LayoutForm, type ProductForm, type Screen, type SectionForm, type ShelfForm } from './types'
@@ -5,7 +6,7 @@ import { defaultLayoutForm, defaultProductForm, defaultSectionForm, defaultShelf
 import { MarketDataContext } from './marketDataContextObject'
 
 export function MarketDataProvider({ children }: { children: ReactNode }) {
-  const [screen, setScreen] = useState<Screen>('config')
+  const [screen, setScreen] = useState<Screen>('search')
   const [configTab, setConfigTab] = useState<ConfigTab>('store')
   const [health, setHealth] = useState<HealthStatus | null>(null)
   const [healthError, setHealthError] = useState<string | null>(null)
@@ -163,7 +164,10 @@ export function MarketDataProvider({ children }: { children: ReactNode }) {
   async function createShelf() {
     if (!selectedLayoutId) return
     try {
-      const shelf = await api.createShelf({ layoutId: selectedLayoutId, ...defaultShelfForm })
+      if (!selectedLayout) return
+      const placement = initialShelfPlacement(selectedLayout)
+      if (!placement) { setMessage('Não foi encontrado espaço para uma prateleira inicial de 40 × 40 cm. Confira as dimensões do contorno.'); return }
+      const shelf = await api.createShelf({ layoutId: selectedLayoutId, ...defaultShelfForm, ...placement })
       setSelectedShelfId(shelf.id)
       await refreshShelves(selectedLayoutId)
       setMessage('Prateleira criada.')
@@ -281,6 +285,7 @@ export function MarketDataProvider({ children }: { children: ReactNode }) {
       setMessage('Posicao salva.')
     } catch (error) {
       showError(error)
+      setShelfForm({ name: shelf.name, positionXCm: shelf.positionXCm, positionYCm: shelf.positionYCm, widthCm: shelf.widthCm, heightCm: shelf.heightCm })
     }
   }
 
@@ -292,7 +297,12 @@ export function MarketDataProvider({ children }: { children: ReactNode }) {
     setSectionForm((current) => ({ ...current, [field]: field === 'name' ? value : Number(value) }))
   }
 
+  function acceptSavedLayout(layout: Layout) {
+    setLayouts(current => current.map(item => item.id === layout.id ? layout : item))
+  }
+
   const value = {
+    acceptSavedLayout,
     screen, setScreen, configTab, setConfigTab, health, healthError, stores, layouts, shelves, sections, products,
     selectedStoreId, setSelectedStoreId, selectedLayoutId, setSelectedLayoutId, selectedShelfId, setSelectedShelfId,
     selectedSectionId, setSelectedSectionId, selectedProductId, setSelectedProductId, searchQuery, setSearchQuery,

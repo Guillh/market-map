@@ -38,6 +38,18 @@ public class Layout {
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt = Instant.now();
 
+    @jakarta.persistence.ElementCollection
+    @jakarta.persistence.CollectionTable(name = "layout_vertices", joinColumns = @JoinColumn(name = "layout_id"))
+    @jakarta.persistence.OrderColumn(name = "vertex_order")
+    private java.util.List<BoundaryVertex> boundary = new java.util.ArrayList<>();
+
+    public java.util.List<BoundaryVertex> getBoundary() { return boundary; }
+
+    public void setBoundary(java.util.List<com.marketmap.backend.layout.dto.LayoutVertex> vertices) {
+        boundary.clear();
+        vertices.forEach(v -> boundary.add(new BoundaryVertex(v.x(), v.y())));
+    }
+
     protected Layout() {
     }
 

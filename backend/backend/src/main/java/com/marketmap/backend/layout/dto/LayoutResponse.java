@@ -11,7 +11,7 @@ public record LayoutResponse(
         String name,
         Integer widthCm,
         Integer heightCm,
-        Instant createdAt) {
+        Instant createdAt, java.util.List<LayoutVertex> boundary) {
     public static LayoutResponse from(Layout layout) {
         return new LayoutResponse(
                 layout.getId(),
@@ -19,6 +19,6 @@ public record LayoutResponse(
                 layout.getName(),
                 layout.getWidthCm(),
                 layout.getHeightCm(),
-                layout.getCreatedAt());
+                layout.getCreatedAt(), layout.getBoundary().stream().map(v -> new LayoutVertex(v.getX(), v.getY())).toList());
     }
 }
