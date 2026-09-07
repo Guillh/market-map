@@ -1,9 +1,9 @@
 package com.marketmap.backend.shelf.dto;
 
-import com.marketmap.backend.shelf.ShelfSection;
-
 import java.time.Instant;
 import java.util.UUID;
+
+import com.marketmap.backend.shelf.ShelfSection;
 
 public record ShelfSectionResponse(
         UUID id,

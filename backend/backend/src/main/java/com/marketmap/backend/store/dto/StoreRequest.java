@@ -1,7 +1,5 @@
 package com.marketmap.backend.store.dto;
 
-import com.marketmap.backend.store.Store;
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 

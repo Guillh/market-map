@@ -1,8 +1,8 @@
 package com.marketmap.backend.product.exception;
 
-import com.marketmap.backend.product.Product;
-
 import java.util.UUID;
+
+import com.marketmap.backend.product.Product;
 
 public class ProductNotFoundException extends RuntimeException {
 

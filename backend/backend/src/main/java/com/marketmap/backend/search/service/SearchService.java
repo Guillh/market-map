@@ -1,16 +1,14 @@
 package com.marketmap.backend.search.service;
 
-import com.marketmap.backend.search.repository.ProductSearchRepository;
-
-import com.marketmap.backend.search.exception.InvalidSearchQueryException;
-
-import com.marketmap.backend.search.dto.ProductSearchResult;
-
 import java.util.List;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.marketmap.backend.search.dto.ProductSearchResult;
+import com.marketmap.backend.search.exception.InvalidSearchQueryException;
+import com.marketmap.backend.search.repository.ProductSearchRepository;
 
 @Service
 @Transactional(readOnly = true)

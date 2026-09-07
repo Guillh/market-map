@@ -1,9 +1,9 @@
 package com.marketmap.backend.store.dto;
 
-import com.marketmap.backend.store.Store;
-
 import java.time.Instant;
 import java.util.UUID;
+
+import com.marketmap.backend.store.Store;
 
 public record StoreResponse(
         UUID id,

@@ -77,4 +77,3 @@ public class ShelfSection {
         return createdAt;
     }
 }
-

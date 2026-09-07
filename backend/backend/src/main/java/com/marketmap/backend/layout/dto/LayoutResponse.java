@@ -1,9 +1,9 @@
 package com.marketmap.backend.layout.dto;
 
-import com.marketmap.backend.layout.Layout;
-
 import java.time.Instant;
 import java.util.UUID;
+
+import com.marketmap.backend.layout.Layout;
 
 public record LayoutResponse(
         UUID id,

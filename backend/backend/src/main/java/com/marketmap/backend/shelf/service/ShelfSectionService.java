@@ -1,26 +1,19 @@
 package com.marketmap.backend.shelf.service;
 
-import com.marketmap.backend.shelf.Shelf;
-
-import com.marketmap.backend.shelf.repository.ShelfSectionRepository;
-
-import com.marketmap.backend.shelf.repository.ShelfRepository;
-
-import com.marketmap.backend.shelf.exception.ShelfSectionNotFoundException;
-
-import com.marketmap.backend.shelf.exception.ShelfNotFoundException;
-
-import com.marketmap.backend.shelf.dto.ShelfSectionResponse;
-
-import com.marketmap.backend.shelf.dto.ShelfSectionRequest;
-
-import com.marketmap.backend.shelf.ShelfSection;
-
 import java.util.List;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.marketmap.backend.shelf.Shelf;
+import com.marketmap.backend.shelf.ShelfSection;
+import com.marketmap.backend.shelf.dto.ShelfSectionRequest;
+import com.marketmap.backend.shelf.dto.ShelfSectionResponse;
+import com.marketmap.backend.shelf.exception.ShelfNotFoundException;
+import com.marketmap.backend.shelf.exception.ShelfSectionNotFoundException;
+import com.marketmap.backend.shelf.repository.ShelfRepository;
+import com.marketmap.backend.shelf.repository.ShelfSectionRepository;
 
 @Service
 @Transactional(readOnly = true)

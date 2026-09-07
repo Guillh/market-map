@@ -1,8 +1,8 @@
 package com.marketmap.backend.store.exception;
 
-import com.marketmap.backend.store.Store;
-
 import java.util.UUID;
+
+import com.marketmap.backend.store.Store;
 
 public class StoreNotFoundException extends RuntimeException {
 

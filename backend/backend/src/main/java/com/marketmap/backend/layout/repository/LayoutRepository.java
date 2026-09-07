@@ -1,11 +1,11 @@
 package com.marketmap.backend.layout.repository;
 
-import com.marketmap.backend.layout.Layout;
-
 import java.util.List;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.marketmap.backend.layout.Layout;
 
 public interface LayoutRepository extends JpaRepository<Layout, UUID> {
 

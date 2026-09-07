@@ -1,7 +1,5 @@
 package com.marketmap.backend.search.repository;
 
-import com.marketmap.backend.search.dto.ProductSearchResult;
-
 import java.util.List;
 import java.util.UUID;
 
@@ -10,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.marketmap.backend.product.ProductLocation;
+import com.marketmap.backend.search.dto.ProductSearchResult;
 
 public interface ProductSearchRepository extends JpaRepository<ProductLocation, UUID> {
 

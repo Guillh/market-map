@@ -1,13 +1,5 @@
 package com.marketmap.backend.layout.controller;
 
-import com.marketmap.backend.layout.service.LayoutService;
-
-import com.marketmap.backend.layout.dto.LayoutResponse;
-
-import com.marketmap.backend.layout.dto.LayoutRequest;
-
-import com.marketmap.backend.layout.Layout;
-
 import java.net.URI;
 import java.util.List;
 import java.util.UUID;
@@ -22,6 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.marketmap.backend.layout.dto.LayoutRequest;
+import com.marketmap.backend.layout.dto.LayoutResponse;
+import com.marketmap.backend.layout.service.LayoutService;
 
 import jakarta.validation.Valid;
 

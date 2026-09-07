@@ -1,13 +1,5 @@
 package com.marketmap.backend.store.controller;
 
-import com.marketmap.backend.store.service.StoreService;
-
-import com.marketmap.backend.store.dto.StoreResponse;
-
-import com.marketmap.backend.store.dto.StoreRequest;
-
-import com.marketmap.backend.store.Store;
-
 import java.net.URI;
 import java.util.List;
 import java.util.UUID;
@@ -21,6 +13,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.marketmap.backend.store.dto.StoreRequest;
+import com.marketmap.backend.store.dto.StoreResponse;
+import com.marketmap.backend.store.service.StoreService;
 
 import jakarta.validation.Valid;
 

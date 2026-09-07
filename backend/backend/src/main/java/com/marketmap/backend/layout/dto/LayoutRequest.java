@@ -1,7 +1,5 @@
 package com.marketmap.backend.layout.dto;
 
-import com.marketmap.backend.layout.Layout;
-
 import java.util.UUID;
 
 import jakarta.validation.constraints.NotBlank;

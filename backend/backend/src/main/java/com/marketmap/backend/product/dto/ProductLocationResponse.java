@@ -1,11 +1,9 @@
 package com.marketmap.backend.product.dto;
 
-import com.marketmap.backend.product.ProductLocation;
-
-import com.marketmap.backend.product.Product;
-
 import java.time.Instant;
 import java.util.UUID;
+
+import com.marketmap.backend.product.ProductLocation;
 
 public record ProductLocationResponse(
         UUID id,

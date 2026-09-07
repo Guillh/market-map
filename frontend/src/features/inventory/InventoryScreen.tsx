@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { api, type InventoryItem, type InventoryLot, type InventoryMovement, type InventoryMovementType, type Product, type ProductLocation, type Shelf, type ShelfSection } from './api'
+import { api, type InventoryItem, type InventoryLot, type InventoryMovement, type InventoryMovementType, type Product, type ProductLocation, type Shelf, type ShelfSection } from '../../services/api'
 
 type InventoryTab = 'items' | 'lots' | 'movements' | 'alerts'
 type InventoryItemForm = { productLocationId: string; quantity: number; minimumQuantity: number }

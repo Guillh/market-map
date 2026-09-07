@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
-import com.marketmap.backend.layout.exception.LayoutNotFoundException;
+import com.marketmap.backend.inventory.exception.InsufficientInventoryException;
 import com.marketmap.backend.inventory.exception.InventoryItemNotFoundException;
 import com.marketmap.backend.inventory.exception.InventoryLotNotFoundException;
-import com.marketmap.backend.inventory.exception.InsufficientInventoryException;
+import com.marketmap.backend.layout.exception.LayoutNotFoundException;
 import com.marketmap.backend.product.exception.ProductLocationNotFoundException;
 import com.marketmap.backend.product.exception.ProductNotFoundException;
 import com.marketmap.backend.search.exception.InvalidSearchQueryException;
@@ -76,4 +76,3 @@ public class ApiExceptionHandler {
     record ApiErrorResponse(int status, String message, Instant timestamp) {
     }
 }
-

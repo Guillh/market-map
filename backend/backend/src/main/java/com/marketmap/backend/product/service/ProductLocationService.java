@@ -1,31 +1,19 @@
 package com.marketmap.backend.product.service;
 
-import com.marketmap.backend.product.repository.ProductLocationRepository;
-
-import com.marketmap.backend.product.repository.ProductRepository;
-
-import com.marketmap.backend.product.exception.ProductLocationNotFoundException;
-
-import com.marketmap.backend.product.exception.ProductNotFoundException;
-
-import com.marketmap.backend.product.dto.ProductLocationResponse;
-
-import com.marketmap.backend.product.dto.ProductLocationRequest;
-
-import com.marketmap.backend.product.ProductLocation;
-
-import com.marketmap.backend.product.Product;
-
-import com.marketmap.backend.shelf.repository.ShelfSectionRepository;
-
-import com.marketmap.backend.shelf.exception.ShelfSectionNotFoundException;
-
 import java.util.List;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.marketmap.backend.product.Product;
+import com.marketmap.backend.product.ProductLocation;
+import com.marketmap.backend.product.dto.ProductLocationRequest;
+import com.marketmap.backend.product.dto.ProductLocationResponse;
+import com.marketmap.backend.product.exception.ProductLocationNotFoundException;
+import com.marketmap.backend.product.exception.ProductNotFoundException;
+import com.marketmap.backend.product.repository.ProductLocationRepository;
+import com.marketmap.backend.product.repository.ProductRepository;
 import com.marketmap.backend.shelf.ShelfSection;
 import com.marketmap.backend.shelf.exception.ShelfSectionNotFoundException;
 import com.marketmap.backend.shelf.repository.ShelfSectionRepository;
