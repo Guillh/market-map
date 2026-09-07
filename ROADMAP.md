@@ -82,11 +82,11 @@ Nesta fase, os pacotes existem apenas como estrutura inicial. As regras de negoc
 
 ## Fase 5 - Estoque Futuro
 
-- [ ] Controlar quantidade por localizacao
-- [ ] Registrar lotes
-- [ ] Registrar datas de validade
-- [ ] Alertar produtos proximos do vencimento
-- [ ] Registrar movimentacoes de entrada e saida
+- [x] Controlar quantidade por localizacao
+- [x] Registrar lotes
+- [x] Registrar datas de validade
+- [x] Alertar produtos proximos do vencimento
+- [x] Registrar movimentacoes de entrada e saida
 
 ## O Que Ja Foi Feito
 
@@ -225,3 +225,43 @@ A interface foi reorganizada para separar configuracao e busca:
 - aba `Vincular Produtos` para associar produtos existentes a secoes, sem editar prateleiras
 - aba `Produtos` para cadastrar e listar produtos
 - tela de busca separada, por enquanto sem exibir o mapa da loja
+
+## Progresso da Fase 5
+
+Foi criada a primeira versao do modulo de estoque:
+
+- migration `V3__create_inventory_model.sql`
+- entidades `InventoryItem`, `InventoryLot` e `InventoryMovement`
+- tipo de movimentacao `InventoryMovementType` com entrada, saida e ajuste
+- repositories, DTOs, services, controllers e exceptions no pacote `inventory`
+- controle de saldo por `ProductLocation`
+- cadastro de lotes com validade opcional
+- endpoint de lotes proximos do vencimento
+- registro de movimentacoes de entrada, saida e ajuste
+- validacao para impedir saida maior que o saldo atual
+- tela `Estoque` no frontend com abas de saldos, lotes, movimentacoes e alertas
+
+Endpoints iniciais da Fase 5:
+
+- `GET /api/inventory/items`
+- `GET /api/inventory/items/{id}`
+- `POST /api/inventory/items`
+- `PUT /api/inventory/items/{id}`
+- `GET /api/inventory/lots`
+- `GET /api/inventory/lots/expiring?days=30`
+- `GET /api/inventory/lots/{id}`
+- `POST /api/inventory/lots`
+- `PUT /api/inventory/lots/{id}`
+- `GET /api/inventory/movements`
+- `POST /api/inventory/movements`
+
+Validacoes executadas:
+
+```bash
+cd F:\market-map\backend\backend
+.\mvnw.cmd clean test -q
+
+cd F:\market-map\frontend
+npm.cmd run build
+npm.cmd run lint
+```

@@ -422,3 +422,8 @@ button:disabled {
   }
 }
 
+
+.stock-warning {
+  border-color: #f79009 !important;
+  background: #fffbeb !important;
+}

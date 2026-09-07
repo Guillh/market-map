@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import com.marketmap.backend.layout.exception.LayoutNotFoundException;
+import com.marketmap.backend.inventory.exception.InventoryItemNotFoundException;
+import com.marketmap.backend.inventory.exception.InventoryLotNotFoundException;
+import com.marketmap.backend.inventory.exception.InsufficientInventoryException;
 import com.marketmap.backend.product.exception.ProductLocationNotFoundException;
 import com.marketmap.backend.product.exception.ProductNotFoundException;
 import com.marketmap.backend.search.exception.InvalidSearchQueryException;
@@ -24,6 +27,8 @@ public class ApiExceptionHandler {
     @ExceptionHandler({
             StoreNotFoundException.class,
             LayoutNotFoundException.class,
+            InventoryItemNotFoundException.class,
+            InventoryLotNotFoundException.class,
             ShelfNotFoundException.class,
             ShelfSectionNotFoundException.class,
             ProductNotFoundException.class,
@@ -31,6 +36,11 @@ public class ApiExceptionHandler {
     })
     ResponseEntity<ApiErrorResponse> handleNotFound(RuntimeException exception) {
         return build(HttpStatus.NOT_FOUND, exception.getMessage());
+    }
+
+    @ExceptionHandler(InsufficientInventoryException.class)
+    ResponseEntity<ApiErrorResponse> handleInsufficientInventory(InsufficientInventoryException exception) {
+        return build(HttpStatus.BAD_REQUEST, exception.getMessage());
     }
 
     @ExceptionHandler(InvalidSearchQueryException.class)

@@ -42,6 +42,53 @@ export type Product = {
   createdAt: string
 }
 
+export type ProductLocation = {
+  id: string
+  productId: string
+  shelfSectionId: string
+  createdAt: string
+}
+
+export type InventoryItem = {
+  id: string
+  productLocationId: string
+  productId: string
+  productName: string
+  productSku: string | null
+  shelfSectionId: string
+  quantity: number
+  minimumQuantity: number
+  belowMinimum: boolean
+  createdAt: string
+  updatedAt: string
+}
+
+export type InventoryLot = {
+  id: string
+  inventoryItemId: string
+  productLocationId: string
+  productId: string
+  productName: string
+  lotCode: string
+  expirationDate: string | null
+  quantity: number
+  createdAt: string
+  updatedAt: string
+}
+
+export type InventoryMovementType = 'IN' | 'OUT' | 'ADJUSTMENT'
+
+export type InventoryMovement = {
+  id: string
+  productLocationId: string
+  productId: string
+  productName: string
+  type: InventoryMovementType
+  quantity: number
+  reason: string | null
+  createdAt: string
+}
+
 export type ProductSearchResult = {
   productId: string
   productName: string
@@ -118,8 +165,25 @@ export const api = {
   products: () => request<Product[]>('/api/products'),
   createProduct: (body: { name: string; sku?: string; brand?: string }) =>
     request<Product>('/api/products', { method: 'POST', body }),
+  productLocations: () => request<ProductLocation[]>('/api/product-locations'),
   createProductLocation: (body: { productId: string; shelfSectionId: string }) =>
-    request<void>('/api/product-locations', { method: 'POST', body }),
+    request<ProductLocation>('/api/product-locations', { method: 'POST', body }),
+  inventoryItems: () => request<InventoryItem[]>('/api/inventory/items'),
+  createInventoryItem: (body: { productLocationId: string; quantity: number; minimumQuantity: number }) =>
+    request<InventoryItem>('/api/inventory/items', { method: 'POST', body }),
+  updateInventoryItem: (id: string, body: { productLocationId: string; quantity: number; minimumQuantity: number }) =>
+    request<InventoryItem>(`/api/inventory/items/${id}`, { method: 'PUT', body }),
+  inventoryLots: (inventoryItemId?: string) =>
+    request<InventoryLot[]>(inventoryItemId ? `/api/inventory/lots?inventoryItemId=${inventoryItemId}` : '/api/inventory/lots'),
+  expiringInventoryLots: (days = 30) => request<InventoryLot[]>(`/api/inventory/lots/expiring?days=${days}`),
+  createInventoryLot: (body: { inventoryItemId: string; lotCode: string; expirationDate?: string; quantity: number }) =>
+    request<InventoryLot>('/api/inventory/lots', { method: 'POST', body }),
+  updateInventoryLot: (id: string, body: { inventoryItemId: string; lotCode: string; expirationDate?: string; quantity: number }) =>
+    request<InventoryLot>(`/api/inventory/lots/${id}`, { method: 'PUT', body }),
+  inventoryMovements: (productLocationId?: string) =>
+    request<InventoryMovement[]>(productLocationId ? `/api/inventory/movements?productLocationId=${productLocationId}` : '/api/inventory/movements'),
+  createInventoryMovement: (body: { productLocationId: string; type: InventoryMovementType; quantity: number; reason?: string }) =>
+    request<InventoryMovement>('/api/inventory/movements', { method: 'POST', body }),
   searchProducts: (query: string) =>
     request<ProductSearchResult[]>(`/api/search/products?query=${encodeURIComponent(query)}`),
 }
